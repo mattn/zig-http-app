@@ -1,0 +1,10 @@
+id: lynxzv7ndvg15i4ws02h7pe5gd3c6jqr6mx433bklempw2a7
+name: http
+license: MIT
+description: foo
+
+root_dependencies:
+  - type: git
+    path: https://github.com/MasterQ32/zig-network
+  - type: git
+    path: https://github.com/truemedian/hzzp
