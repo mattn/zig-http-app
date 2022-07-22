@@ -29,14 +29,6 @@ pub fn main() anyerror!void {
     }
 }
 
-fn strcaseeql(lhs: []const u8, rhs: []const u8) bool {
-    if (lhs.len != rhs.len) return false;
-    for (lhs) |c, i| {
-        if (std.ascii.toLower(c) != std.ascii.toLower(rhs[i])) return false;
-    }
-    return true;
-}
-
 const Client = struct {
     allocator: std.mem.Allocator,
     conn: network.Socket,
@@ -58,8 +50,8 @@ const Client = struct {
                 }
                 switch (actual.?) {
                     .header => |v| {
-                        if (strcaseeql(v.name, "Connection") and
-                            strcaseeql(v.value, "keep-alive"))
+                        if (std.ascii.eqlIgnoreCase(v.name, "Connection") and
+                            std.ascii.eqlIgnoreCase(v.value, "keep-alive"))
                         {
                             close = false;
                         }
